@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PracticaLibroDiarioTemplate.Models.Contexts;
 
 namespace PracticaLibroDiarioTemplate
 {
@@ -30,7 +32,11 @@ namespace PracticaLibroDiarioTemplate
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddDbContext<LibroDiarioContext>(options => options.UseInMemoryDatabase(databaseName: "LibrosContables"));
 
+            //services.AddSingleton<LibroDiarioContext,LibroDiarioContext>(); // 1 instancia para todas las llamadas de la aplicacion
+            //services.AddScoped<LibroDiarioContext, LibroDiarioContext>(); // 1 instancia en la misma ejecucion.
+            //services.AddTransient<LibroDiarioContext, LibroDiarioContext>(); // 1 instancia cada vez que se invoca
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

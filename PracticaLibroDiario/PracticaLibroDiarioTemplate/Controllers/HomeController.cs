@@ -5,11 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PracticaLibroDiarioTemplate.Models;
+using PracticaLibroDiarioTemplate.Models.Contexts;
 
 namespace PracticaLibroDiarioTemplate.Controllers
 {
     public class HomeController : Controller
     {
+        LibroDiarioContext db;
+        public HomeController(LibroDiarioContext context)
+        {
+
+        }
         public IActionResult Index()
         {
             return View();
