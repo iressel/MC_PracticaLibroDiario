@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PracticaLibroDiarioTemplate.Models.BusinessModel;
+using PracticaLibroDiarioTemplate.Models.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +37,8 @@ namespace PracticaLibroDiarioTemplate.Repositories
 
         public Guid DeleteAsientoLibroMayor(Guid id)
         {
-            context.LibroMayor.Delete(asiento);
+            var asiento = context.LibroMayor.Find(id);
+            context.LibroMayor.Remove(asiento);
             context.SaveChanges();
             return asiento.AsientoLibroMayorId;
         }
